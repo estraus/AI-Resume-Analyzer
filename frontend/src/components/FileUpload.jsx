@@ -42,15 +42,12 @@ export default function FileUpload({ onFileSelect, selectedFile }) {
 
   return (
     <div className="w-full">
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Resume (PDF)
+      <label className="block text-sm font-semibold text-gray-700 mb-3">
+        📄 Upload Your Resume
       </label>
       <div
-        className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-          dragActive
-            ? 'border-blue-500 bg-blue-50'
-            : 'border-gray-300 hover:border-gray-400'
-        }`}
+        className={`upload-zone relative p-10 text-center cursor-pointer transition-all duration-300 ${dragActive ? 'active' : ''
+          } ${selectedFile ? 'border-green-400 bg-green-50' : ''}`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
@@ -62,31 +59,32 @@ export default function FileUpload({ onFileSelect, selectedFile }) {
           onChange={handleChange}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         />
-        <div className="space-y-2">
-          <svg
-            className="mx-auto h-12 w-12 text-gray-400"
-            stroke="currentColor"
-            fill="none"
-            viewBox="0 0 48 48"
-            style={{ maxWidth: '48px', maxHeight: '48px' }}
-          >
-            <path
-              d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+        <div className="space-y-4">
           {selectedFile ? (
-            <p className="text-sm text-gray-600">
-              <span className="font-medium text-blue-600">{selectedFile.name}</span>
-            </p>
+            <>
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100">
+                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-lg font-semibold text-gray-800">{selectedFile.name}</p>
+                <p className="text-sm text-gray-500 mt-1">Click or drag to replace</p>
+              </div>
+            </>
           ) : (
             <>
-              <p className="text-sm text-gray-600">
-                <span className="font-medium text-blue-600">Click to upload</span> or drag and drop
-              </p>
-              <p className="text-xs text-gray-500">PDF files only</p>
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 float">
+                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-lg text-gray-700">
+                  <span className="font-semibold text-purple-600">Click to upload</span> or drag and drop
+                </p>
+                <p className="text-sm text-gray-500 mt-1">PDF files only (max 10MB)</p>
+              </div>
             </>
           )}
         </div>
