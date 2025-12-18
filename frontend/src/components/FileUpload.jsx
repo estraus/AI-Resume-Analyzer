@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Upload, CheckCircle, Cloud } from 'lucide-react'
+import { Upload, CheckCircle } from 'lucide-react'
 
 export default function FileUpload({ onFileSelect, selectedFile }) {
   const [dragActive, setDragActive] = useState(false)
@@ -43,18 +43,18 @@ export default function FileUpload({ onFileSelect, selectedFile }) {
 
   return (
     <div className="w-full">
-      <label className="block text-sm font-medium text-zinc-300 mb-3">
+      <label className="block text-sm font-medium text-[#49454F] mb-2">
         Resume (PDF)
       </label>
       <div
         className={`
-          relative rounded-xl border-2 border-dashed p-8 text-center cursor-pointer
+          relative rounded-[16px] border-2 border-dashed p-8 text-center cursor-pointer
           transition-all duration-200
           ${dragActive
-            ? 'border-indigo-500 bg-indigo-500/10'
+            ? 'border-[#6750A4] bg-[#EADDFF]'
             : selectedFile
-              ? 'border-emerald-500/50 bg-emerald-500/5'
-              : 'border-zinc-700 hover:border-zinc-600 bg-zinc-800/50'
+              ? 'border-[#1B5E20] bg-[#E8F5E9]'
+              : 'border-[#CAC4D0] bg-[#F3EDF7] hover:bg-[#EADDFF]'
           }
         `}
         onDragEnter={handleDrag}
@@ -68,27 +68,27 @@ export default function FileUpload({ onFileSelect, selectedFile }) {
           onChange={handleChange}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         />
-        <div className="space-y-3">
+        <div className="flex flex-col items-center gap-3">
           {selectedFile ? (
             <>
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30">
-                <CheckCircle className="w-6 h-6 text-emerald-400" />
+              <div className="w-12 h-12 rounded-full bg-[#1B5E20] flex items-center justify-center">
+                <CheckCircle className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-sm font-medium text-zinc-200">{selectedFile.name}</p>
-                <p className="text-xs text-zinc-500 mt-1">Click or drag to replace</p>
+                <p className="text-sm font-medium text-[#1C1B1F]">{selectedFile.name}</p>
+                <p className="text-xs text-[#49454F] mt-1">Tap to replace</p>
               </div>
             </>
           ) : (
             <>
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-800 border border-zinc-700">
-                <Cloud className="w-6 h-6 text-zinc-400" />
+              <div className="w-12 h-12 rounded-full bg-[#6750A4] flex items-center justify-center">
+                <Upload className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-sm text-zinc-300">
-                  <span className="font-medium text-indigo-400">Click to upload</span> or drag and drop
+                <p className="text-sm font-medium text-[#1C1B1F]">
+                  Drop your resume here
                 </p>
-                <p className="text-xs text-zinc-500 mt-1">PDF files only</p>
+                <p className="text-xs text-[#49454F] mt-1">or tap to browse</p>
               </div>
             </>
           )}

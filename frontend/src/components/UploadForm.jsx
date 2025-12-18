@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Zap, Loader2 } from 'lucide-react'
+import { Sparkles, Loader2 } from 'lucide-react'
 import FileUpload from './FileUpload'
 
 export default function UploadForm({ onSubmit, isAnalyzing }) {
@@ -27,7 +27,7 @@ export default function UploadForm({ onSubmit, isAnalyzing }) {
       />
 
       <div>
-        <label htmlFor="jobUrl" className="block text-sm font-medium text-zinc-300 mb-3">
+        <label htmlFor="jobUrl" className="block text-sm font-medium text-[#49454F] mb-2">
           Job Posting URL
         </label>
         <input
@@ -35,21 +35,22 @@ export default function UploadForm({ onSubmit, isAnalyzing }) {
           id="jobUrl"
           value={jobUrl}
           onChange={(e) => setJobUrl(e.target.value)}
-          placeholder="https://company.com/careers/job-posting"
-          className="w-full px-4 py-3 rounded-xl border border-zinc-700 bg-zinc-800/50 text-zinc-200 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
+          placeholder="https://company.com/careers/job"
+          className="w-full px-4 py-4 rounded-[16px] border border-[#CAC4D0] bg-white text-[#1C1B1F] placeholder-[#79747E] focus:outline-none focus:border-[#6750A4] focus:ring-2 focus:ring-[#6750A4]/20 transition-all"
           required
         />
       </div>
 
+      {/* Material Design 3 Filled Button */}
       <button
         type="submit"
         disabled={isAnalyzing || !resumeFile}
         className={`
-          w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-white
+          w-full flex items-center justify-center gap-3 px-6 py-4 rounded-full font-medium text-base
           transition-all duration-200
           ${isAnalyzing || !resumeFile
-            ? 'bg-zinc-700 cursor-not-allowed'
-            : 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/30'
+            ? 'bg-[#E7E0EC] text-[#1C1B1F]/38 cursor-not-allowed'
+            : 'bg-[#6750A4] text-white hover:bg-[#7965AF] shadow-md hover:shadow-lg active:shadow-sm'
           }
         `}
       >
@@ -60,7 +61,7 @@ export default function UploadForm({ onSubmit, isAnalyzing }) {
           </>
         ) : (
           <>
-            <Zap className="w-5 h-5" />
+            <Sparkles className="w-5 h-5" />
             Analyze Resume
           </>
         )}

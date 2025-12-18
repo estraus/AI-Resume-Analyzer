@@ -1,62 +1,55 @@
 import { Check, X } from 'lucide-react'
 
 export default function KeywordComparison({ matched, missing }) {
-  // Convert arrays to the KeywordMatch format
-  const keywords = [
-    ...matched.map(keyword => ({ keyword, matched: true })),
-    ...missing.map(keyword => ({ keyword, matched: false }))
-  ]
-
-  const matchPercentage = keywords.length > 0
-    ? Math.round((matched.length / keywords.length) * 100)
+  const matchPercentage = (matched.length + missing.length) > 0
+    ? Math.round((matched.length / (matched.length + missing.length)) * 100)
     : 0
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-zinc-900/50 backdrop-blur-md p-6 shadow-sm">
+    <div className="rounded-[28px] bg-[#F3EDF7] p-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-          Keyword Match
+      <div className="flex items-center justify-between mb-5">
+        <h3 className="text-base font-medium text-[#1C1B1F]">
+          Keywords
         </h3>
-        <span className="text-sm font-medium text-zinc-400">
-          {matched.length}/{keywords.length} matched ({matchPercentage}%)
+        <span className="text-sm text-[#49454F]">
+          {matched.length}/{matched.length + missing.length} matched
         </span>
       </div>
 
-      {/* Matched Keywords */}
-      <div className="mb-4">
-        <h4 className="text-xs font-medium text-zinc-400 uppercase tracking-wide mb-2 flex items-center gap-1">
-          <Check className="w-3 h-3 text-emerald-400" />
+      {/* Matched Keywords - Filled/Tonal Chips */}
+      <div className="mb-5">
+        <p className="text-xs font-medium text-[#49454F] uppercase tracking-wide mb-3 flex items-center gap-1">
+          <Check className="w-3 h-3 text-[#1B5E20]" />
           Matched
-        </h4>
+        </p>
         <div className="flex flex-wrap gap-2">
           {matched.map((keyword, idx) => (
-            <span
+            <div
               key={idx}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 transition-transform hover:scale-105"
+              className="inline-flex items-center gap-1.5 h-8 px-3 rounded-full bg-[#1B5E20] text-white text-sm font-medium"
             >
-              <Check className="w-3 h-3" />
+              <Check className="w-4 h-4" />
               {keyword}
-            </span>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Missing Keywords */}
+      {/* Missing Keywords - Outlined Chips */}
       <div>
-        <h4 className="text-xs font-medium text-zinc-400 uppercase tracking-wide mb-2 flex items-center gap-1">
-          <X className="w-3 h-3 text-zinc-500" />
+        <p className="text-xs font-medium text-[#49454F] uppercase tracking-wide mb-3 flex items-center gap-1">
+          <X className="w-3 h-3 text-[#79747E]" />
           Missing
-        </h4>
+        </p>
         <div className="flex flex-wrap gap-2">
           {missing.map((keyword, idx) => (
-            <span
+            <div
               key={idx}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-zinc-800/50 text-zinc-400 border border-dashed border-zinc-600 transition-transform hover:scale-105"
+              className="inline-flex items-center gap-1.5 h-8 px-3 rounded-full border border-[#79747E] text-[#49454F] text-sm font-medium bg-transparent"
             >
-              <X className="w-3 h-3" />
               {keyword}
-            </span>
+            </div>
           ))}
         </div>
       </div>

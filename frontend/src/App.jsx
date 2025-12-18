@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Sparkles, FileText, Link2, Zap, AlertCircle } from 'lucide-react'
+import { Sparkles, AlertCircle } from 'lucide-react'
 import UploadForm from './components/UploadForm'
 import AgentActivity from './components/AgentActivity'
 import ResultsDashboard from './components/ResultsDashboard'
@@ -68,31 +68,33 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 pb-24">
+      <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-zinc-900/50 backdrop-blur-md border border-white/10 mb-6">
-            <Sparkles className="w-8 h-8 text-indigo-400" />
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-[28px] bg-[#EADDFF] mb-6">
+            <Sparkles className="w-8 h-8 text-[#6750A4]" />
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-violet-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent mb-4">
-            AI Resume Analyzer
+          <h1 className="text-3xl font-semibold text-[#1C1B1F] mb-2">
+            Resume Analyzer
           </h1>
-          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-            Get instant AI-powered insights on your resume quality and job match score
+          <p className="text-base text-[#49454F]">
+            AI-powered insights for your resume
           </p>
         </div>
 
         {/* Error Alert */}
         {error && (
-          <div className="max-w-2xl mx-auto mb-8 p-4 rounded-xl border border-red-500/30 bg-red-500/10 backdrop-blur-md flex items-center gap-3">
-            <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
-            <p className="text-red-300 text-sm">{error}</p>
+          <div className="mb-6 p-4 rounded-[28px] bg-[#FFDAD6] flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full bg-[#BA1A1A] flex items-center justify-center">
+              <AlertCircle className="w-5 h-5 text-white" />
+            </div>
+            <p className="text-[#410002] text-sm flex-1">{error}</p>
           </div>
         )}
 
-        {/* Main Card */}
-        <div className="rounded-2xl border border-white/10 bg-zinc-900/50 backdrop-blur-md p-8 sm:p-12 shadow-xl">
+        {/* Main Card - Material You elevated surface */}
+        <div className="rounded-[28px] bg-white shadow-sm p-6 sm:p-8">
           {!isAnalyzing && !analysisResult && (
             <UploadForm onSubmit={handleAnalyze} isAnalyzing={false} />
           )}
@@ -107,10 +109,9 @@ function App() {
         </div>
 
         {/* Footer */}
-        <div className="text-center mt-8 text-zinc-500 text-sm flex items-center justify-center gap-2">
-          <Zap className="w-4 h-4" />
-          <span>Powered by CrewAI and Claude</span>
-        </div>
+        <p className="text-center mt-6 text-sm text-[#79747E]">
+          Powered by CrewAI and Claude
+        </p>
       </div>
     </div>
   )
