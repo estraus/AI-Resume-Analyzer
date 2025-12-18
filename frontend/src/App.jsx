@@ -68,33 +68,32 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 pb-24">
-      <div className="max-w-3xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-[28px] bg-[#EADDFF] mb-6">
-            <Sparkles className="w-8 h-8 text-[#6750A4]" />
-          </div>
-          <h1 className="text-3xl font-semibold text-[#1C1B1F] mb-2">
+    <div className="min-h-screen py-12 px-4">
+      {/* Centered single column - max 680px */}
+      <div className="max-w-[680px] mx-auto">
+
+        {/* Header - Display Small typography */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-slate-900 tracking-tight mb-2">
             Resume Analyzer
           </h1>
-          <p className="text-base text-[#49454F]">
-            AI-powered insights for your resume
+          <p className="text-lg text-slate-500">
+            AI-powered insights for your career
           </p>
         </div>
 
         {/* Error Alert */}
         {error && (
-          <div className="mb-6 p-4 rounded-[28px] bg-[#FFDAD6] flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-[#BA1A1A] flex items-center justify-center">
-              <AlertCircle className="w-5 h-5 text-white" />
-            </div>
-            <p className="text-[#410002] text-sm flex-1">{error}</p>
+          <div className="mb-6 p-4 rounded-2xl bg-red-50 border border-red-200 flex items-center gap-3">
+            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+            <p className="text-red-700 text-sm">{error}</p>
           </div>
         )}
 
-        {/* Main Card - Material You elevated surface */}
-        <div className="rounded-[28px] bg-white shadow-sm p-6 sm:p-8">
+        {/* Main Card - M3 Paper metaphor */}
+        <div
+          className="bg-white rounded-[28px] p-8 shadow-[0px_4px_8px_rgba(0,0,0,0.05)]"
+        >
           {!isAnalyzing && !analysisResult && (
             <UploadForm onSubmit={handleAnalyze} isAnalyzing={false} />
           )}
@@ -109,7 +108,7 @@ function App() {
         </div>
 
         {/* Footer */}
-        <p className="text-center mt-6 text-sm text-[#79747E]">
+        <p className="text-center mt-8 text-sm text-slate-400">
           Powered by CrewAI and Claude
         </p>
       </div>

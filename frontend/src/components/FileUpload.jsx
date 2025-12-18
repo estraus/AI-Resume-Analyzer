@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Upload, CheckCircle } from 'lucide-react'
+import { Cloud, CheckCircle } from 'lucide-react'
 
 export default function FileUpload({ onFileSelect, selectedFile }) {
   const [dragActive, setDragActive] = useState(false)
@@ -42,19 +42,17 @@ export default function FileUpload({ onFileSelect, selectedFile }) {
   }
 
   return (
-    <div className="w-full">
-      <label className="block text-sm font-medium text-[#49454F] mb-2">
-        Resume (PDF)
-      </label>
+    <div className="w-full mb-6">
+      {/* Surface Variant upload zone with large centered icon */}
       <div
         className={`
-          relative rounded-[16px] border-2 border-dashed p-8 text-center cursor-pointer
-          transition-all duration-200
+          upload-zone relative rounded-2xl border-2 border-dashed p-10 text-center cursor-pointer
+          transition-all duration-300 ease-out
           ${dragActive
-            ? 'border-[#6750A4] bg-[#EADDFF]'
+            ? 'border-indigo-500 bg-indigo-100'
             : selectedFile
-              ? 'border-[#1B5E20] bg-[#E8F5E9]'
-              : 'border-[#CAC4D0] bg-[#F3EDF7] hover:bg-[#EADDFF]'
+              ? 'border-green-400 bg-green-50'
+              : 'border-slate-300 bg-indigo-50/50 hover:bg-indigo-100/70 hover:border-indigo-400'
           }
         `}
         onDragEnter={handleDrag}
@@ -66,29 +64,32 @@ export default function FileUpload({ onFileSelect, selectedFile }) {
           type="file"
           accept=".pdf"
           onChange={handleChange}
-          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
         />
-        <div className="flex flex-col items-center gap-3">
+
+        <div className="flex flex-col items-center gap-4">
           {selectedFile ? (
             <>
-              <div className="w-12 h-12 rounded-full bg-[#1B5E20] flex items-center justify-center">
-                <CheckCircle className="w-6 h-6 text-white" />
+              {/* Success state */}
+              <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-white" />
               </div>
               <div>
-                <p className="text-sm font-medium text-[#1C1B1F]">{selectedFile.name}</p>
-                <p className="text-xs text-[#49454F] mt-1">Tap to replace</p>
+                <p className="text-base font-medium text-slate-900">{selectedFile.name}</p>
+                <p className="text-sm text-slate-500 mt-1">Click or drop to replace</p>
               </div>
             </>
           ) : (
             <>
-              <div className="w-12 h-12 rounded-full bg-[#6750A4] flex items-center justify-center">
-                <Upload className="w-6 h-6 text-white" />
+              {/* Large centered Material Icon in primary accent */}
+              <div className="w-16 h-16 rounded-full bg-indigo-600 flex items-center justify-center">
+                <Cloud className="w-8 h-8 text-white" />
               </div>
               <div>
-                <p className="text-sm font-medium text-[#1C1B1F]">
+                <p className="text-base font-medium text-slate-900">
                   Drop your resume here
                 </p>
-                <p className="text-xs text-[#49454F] mt-1">or tap to browse</p>
+                <p className="text-sm text-slate-500 mt-1">or click to browse • PDF only</p>
               </div>
             </>
           )}
