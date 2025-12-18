@@ -75,7 +75,7 @@ function App() {
   return (
     <div className="min-h-screen bg-zinc-100">
       {/* Outer wrapper with significant side padding */}
-      <div className="px-8 sm:px-16 lg:px-32 py-24">
+      <div className="px-8 sm:px-16 lg:px-32 pt-32 pb-24">
         {/* Centered container with explicit max-width */}
         <div className="mx-auto" style={{ maxWidth: '600px' }}>
 
