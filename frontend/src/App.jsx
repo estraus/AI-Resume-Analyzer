@@ -68,19 +68,8 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4">
-      {/* Centered single column - max 680px */}
-      <div className="max-w-[680px] mx-auto">
-
-        {/* Header - Display Small typography */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight mb-2">
-            Resume Analyzer
-          </h1>
-          <p className="text-lg text-slate-500">
-            AI-powered insights for your career
-          </p>
-        </div>
+    <div className="min-h-screen py-12 px-4 flex items-center justify-center">
+      <div className="w-full max-w-[680px]">
 
         {/* Error Alert */}
         {error && (
@@ -90,22 +79,34 @@ function App() {
           </div>
         )}
 
-        {/* Main Card - M3 Paper metaphor */}
-        <div
-          className="bg-white rounded-[28px] p-8 shadow-[0px_4px_8px_rgba(0,0,0,0.05)]"
-        >
-          {!isAnalyzing && !analysisResult && (
-            <UploadForm onSubmit={handleAnalyze} isAnalyzing={false} />
-          )}
+        {/* Upload Form - wrapped in card */}
+        {!isAnalyzing && !analysisResult && (
+          <div className="bg-white rounded-[32px] shadow-xl overflow-hidden">
+            {/* Header */}
+            <div className="bg-slate-50 p-8 border-b border-slate-100 text-center">
+              <h1 className="text-2xl font-semibold text-slate-900 mb-1">
+                Resume Analyzer
+              </h1>
+              <p className="text-sm text-slate-500">
+                AI-powered insights for your career
+              </p>
+            </div>
+            {/* Form */}
+            <div className="p-8">
+              <UploadForm onSubmit={handleAnalyze} isAnalyzing={false} />
+            </div>
+          </div>
+        )}
 
-          {isAnalyzing && (
-            <AgentActivity updates={agentUpdates} />
-          )}
+        {/* Agent Activity - has its own card */}
+        {isAnalyzing && (
+          <AgentActivity updates={agentUpdates} />
+        )}
 
-          {analysisResult && (
-            <ResultsDashboard result={analysisResult} onReset={handleReset} />
-          )}
-        </div>
+        {/* Results - has its own card structure */}
+        {analysisResult && (
+          <ResultsDashboard result={analysisResult} onReset={handleReset} />
+        )}
 
         {/* Footer */}
         <p className="text-center mt-8 text-sm text-slate-400">
