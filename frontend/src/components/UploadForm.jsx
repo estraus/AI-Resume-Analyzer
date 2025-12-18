@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Zap, Loader2 } from 'lucide-react'
 import FileUpload from './FileUpload'
 
 export default function UploadForm({ onSubmit, isAnalyzing }) {
@@ -7,30 +8,27 @@ export default function UploadForm({ onSubmit, isAnalyzing }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     if (!resumeFile) {
       alert('Please upload a resume')
       return
     }
-
     if (!jobUrl) {
       alert('Please enter a job URL')
       return
     }
-
     onSubmit({ resumeFile, jobUrl })
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <FileUpload
         onFileSelect={setResumeFile}
         selectedFile={resumeFile}
       />
 
       <div>
-        <label htmlFor="jobUrl" className="block text-sm font-semibold text-gray-700 mb-3">
-          🔗 Job Posting URL
+        <label htmlFor="jobUrl" className="block text-sm font-medium text-zinc-300 mb-3">
+          Job Posting URL
         </label>
         <input
           type="url"
@@ -38,43 +36,35 @@ export default function UploadForm({ onSubmit, isAnalyzing }) {
           value={jobUrl}
           onChange={(e) => setJobUrl(e.target.value)}
           placeholder="https://company.com/careers/job-posting"
-          className="input-modern"
+          className="w-full px-4 py-3 rounded-xl border border-zinc-700 bg-zinc-800/50 text-zinc-200 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
           required
         />
-        <p className="mt-2 text-sm text-gray-500">
-          Paste the URL of the job you're applying for
-        </p>
       </div>
 
       <button
         type="submit"
         disabled={isAnalyzing || !resumeFile}
-        className={`btn-gradient w-full flex items-center justify-center gap-3 ${!resumeFile ? 'opacity-60' : ''
-          }`}
+        className={`
+          w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-white
+          transition-all duration-200
+          ${isAnalyzing || !resumeFile
+            ? 'bg-zinc-700 cursor-not-allowed'
+            : 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/30'
+          }
+        `}
       >
         {isAnalyzing ? (
           <>
-            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
+            <Loader2 className="w-5 h-5 animate-spin" />
             Analyzing...
           </>
         ) : (
           <>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
+            <Zap className="w-5 h-5" />
             Analyze Resume
           </>
         )}
       </button>
-
-      {!resumeFile && (
-        <p className="text-center text-sm text-gray-500">
-          Upload your resume to get started
-        </p>
-      )}
     </form>
   )
 }

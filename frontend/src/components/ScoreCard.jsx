@@ -5,69 +5,57 @@ export default function ScoreCard({ title, score, subtitle }) {
     return 'from-red-500 to-rose-500'
   }
 
-  const getTextColor = (score) => {
-    if (score >= 80) return 'text-emerald-600'
-    if (score >= 60) return 'text-amber-600'
-    return 'text-red-600'
+  const getBorderColor = (score) => {
+    if (score >= 80) return 'border-emerald-500/30'
+    if (score >= 60) return 'border-amber-500/30'
+    return 'border-red-500/30'
   }
 
-  const getBgGradient = (score) => {
-    if (score >= 80) return 'from-emerald-50 to-green-50'
-    if (score >= 60) return 'from-amber-50 to-yellow-50'
-    return 'from-red-50 to-rose-50'
-  }
-
-  // Calculate stroke dashoffset for circular progress
-  const circumference = 2 * Math.PI * 45
+  const circumference = 2 * Math.PI * 40
   const strokeDashoffset = circumference - (score / 100) * circumference
 
   return (
-    <div className={`score-card bg-gradient-to-br ${getBgGradient(score)}`}>
-      <h3 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">{title}</h3>
+    <div className={`rounded-2xl border bg-zinc-900/50 backdrop-blur-md p-6 text-center shadow-sm ${getBorderColor(score)}`}>
+      <h3 className="text-sm font-medium text-zinc-400 uppercase tracking-wide mb-4">{title}</h3>
 
       {/* Circular Progress */}
       <div className="relative inline-flex items-center justify-center mb-4">
-        <svg className="w-32 h-32 transform -rotate-90">
-          {/* Background circle */}
+        <svg className="w-28 h-28 transform -rotate-90">
           <circle
-            cx="64"
-            cy="64"
-            r="45"
+            cx="56"
+            cy="56"
+            r="40"
             stroke="currentColor"
-            strokeWidth="8"
+            strokeWidth="6"
             fill="none"
-            className="text-gray-200"
+            className="text-zinc-800"
           />
-          {/* Progress circle */}
           <circle
-            cx="64"
-            cy="64"
-            r="45"
-            stroke="url(#gradient)"
-            strokeWidth="8"
+            cx="56"
+            cy="56"
+            r="40"
+            strokeWidth="6"
             fill="none"
             strokeLinecap="round"
+            className={`text-transparent bg-gradient-to-r ${getGradient(score)}`}
             style={{
+              stroke: score >= 80 ? '#10b981' : score >= 60 ? '#f59e0b' : '#ef4444',
               strokeDasharray: circumference,
               strokeDashoffset: strokeDashoffset,
               transition: 'stroke-dashoffset 1s ease-out'
             }}
           />
-          <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" className={score >= 80 ? 'text-emerald-500' : score >= 60 ? 'text-amber-500' : 'text-red-500'} style={{ stopColor: 'currentColor' }} />
-              <stop offset="100%" className={score >= 80 ? 'text-green-500' : score >= 60 ? 'text-yellow-500' : 'text-rose-500'} style={{ stopColor: 'currentColor' }} />
-            </linearGradient>
-          </defs>
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className={`text-4xl font-bold ${getTextColor(score)}`}>{Math.round(score)}</span>
-          <span className="text-sm text-gray-400">/100</span>
+          <span className={`text-3xl font-bold bg-gradient-to-r ${getGradient(score)} bg-clip-text text-transparent`}>
+            {Math.round(score)}
+          </span>
+          <span className="text-xs text-zinc-500">/100</span>
         </div>
       </div>
 
       {subtitle && (
-        <p className="text-sm text-gray-600">{subtitle}</p>
+        <p className="text-xs text-zinc-500">{subtitle}</p>
       )}
     </div>
   )
