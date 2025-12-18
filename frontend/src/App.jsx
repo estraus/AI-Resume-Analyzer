@@ -73,49 +73,52 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 px-4">
-      {/* Centered container with significant top margin */}
-      <div className="max-w-3xl mx-auto mt-24">
+    <div className="min-h-screen bg-zinc-100">
+      {/* Outer wrapper with significant side padding */}
+      <div className="px-8 sm:px-16 lg:px-32 py-24">
+        {/* Centered container with explicit max-width */}
+        <div className="mx-auto" style={{ maxWidth: '600px' }}>
 
-        {/* Error Alert */}
-        {error && (
-          <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 flex items-center gap-3">
-            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
-            <p className="text-red-700 text-sm">{error}</p>
-          </div>
-        )}
-
-        {/* Main Container - flat border, no heavy shadow */}
-        <div className="bg-white rounded-2xl border border-zinc-200">
-          {/* Header */}
-          <div className="text-center p-12 pb-0">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-100 mb-6">
-              <Sparkles className="w-8 h-8 text-indigo-600" />
+          {/* Error Alert */}
+          {error && (
+            <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 flex items-center gap-3">
+              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+              <p className="text-red-700 text-sm">{error}</p>
             </div>
-            <h1 className="text-3xl font-bold text-zinc-900 mb-2">
-              Resume Analyzer
-            </h1>
-            <p className="text-base text-zinc-500">
-              AI-powered insights for your career
-            </p>
+          )}
+
+          {/* Main Card - flat border, generous internal padding */}
+          <div className="bg-white rounded-2xl border border-zinc-200">
+            {/* Header */}
+            <div className="text-center px-12 pt-12 pb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-100 mb-6">
+                <Sparkles className="w-8 h-8 text-indigo-600" />
+              </div>
+              <h1 className="text-3xl font-bold text-zinc-900 mb-2">
+                Resume Analyzer
+              </h1>
+              <p className="text-base text-zinc-500">
+                AI-powered insights for your career
+              </p>
+            </div>
+
+            {/* Content */}
+            <div className="px-12 pb-12">
+              {!isAnalyzing && (
+                <UploadForm onSubmit={handleAnalyze} isAnalyzing={false} />
+              )}
+
+              {isAnalyzing && (
+                <AgentActivity updates={agentUpdates} />
+              )}
+            </div>
           </div>
 
-          {/* Content with generous padding */}
-          <div className="p-12">
-            {!isAnalyzing && (
-              <UploadForm onSubmit={handleAnalyze} isAnalyzing={false} />
-            )}
-
-            {isAnalyzing && (
-              <AgentActivity updates={agentUpdates} />
-            )}
-          </div>
+          {/* Footer */}
+          <p className="text-center mt-8 text-sm text-zinc-400">
+            Powered by CrewAI and Claude
+          </p>
         </div>
-
-        {/* Footer */}
-        <p className="text-center mt-8 text-sm text-zinc-400">
-          Powered by CrewAI and Claude
-        </p>
       </div>
     </div>
   )
