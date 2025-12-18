@@ -67,24 +67,32 @@ function App() {
     setError(null)
   }
 
+  // Results has its own full-page layout
+  if (analysisResult) {
+    return <ResultsDashboard result={analysisResult} onReset={handleReset} />
+  }
+
   return (
-    <div className="min-h-screen py-12 px-4 flex items-center justify-center">
-      <div className="w-full max-w-[680px]">
+    <div className="min-h-screen bg-slate-50 py-12 px-4 flex items-center justify-center">
+      <div className="w-full max-w-md">
 
         {/* Error Alert */}
         {error && (
-          <div className="mb-6 p-4 rounded-2xl bg-red-50 border border-red-200 flex items-center gap-3">
+          <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 flex items-center gap-3">
             <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
             <p className="text-red-700 text-sm">{error}</p>
           </div>
         )}
 
-        {/* Upload Form - wrapped in card */}
-        {!isAnalyzing && !analysisResult && (
-          <div className="bg-white rounded-[32px] shadow-xl overflow-hidden">
+        {/* Upload Form Card */}
+        {!isAnalyzing && (
+          <div className="bg-white rounded-[32px] shadow-xl border border-slate-100 overflow-hidden">
             {/* Header */}
-            <div className="bg-slate-50 p-8 border-b border-slate-100 text-center">
-              <h1 className="text-2xl font-semibold text-slate-900 mb-1">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 border-b border-slate-100 text-center">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-600 mb-4">
+                <Sparkles className="w-7 h-7 text-white" />
+              </div>
+              <h1 className="text-2xl font-bold text-slate-900 mb-1">
                 Resume Analyzer
               </h1>
               <p className="text-sm text-slate-500">
@@ -98,14 +106,9 @@ function App() {
           </div>
         )}
 
-        {/* Agent Activity - has its own card */}
+        {/* Agent Activity Card */}
         {isAnalyzing && (
           <AgentActivity updates={agentUpdates} />
-        )}
-
-        {/* Results - has its own card structure */}
-        {analysisResult && (
-          <ResultsDashboard result={analysisResult} onReset={handleReset} />
         )}
 
         {/* Footer */}
