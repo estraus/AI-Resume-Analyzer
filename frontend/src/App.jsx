@@ -73,8 +73,9 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 flex items-center justify-center">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-zinc-50 px-4">
+      {/* Centered container with significant top margin */}
+      <div className="max-w-3xl mx-auto mt-24">
 
         {/* Error Alert */}
         {error && (
@@ -84,35 +85,35 @@ function App() {
           </div>
         )}
 
-        {/* Upload Form Card */}
-        {!isAnalyzing && (
-          <div className="bg-white rounded-[32px] shadow-xl border border-slate-100 overflow-hidden">
-            {/* Header */}
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 border-b border-slate-100 text-center">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-600 mb-4">
-                <Sparkles className="w-7 h-7 text-white" />
-              </div>
-              <h1 className="text-2xl font-bold text-slate-900 mb-1">
-                Resume Analyzer
-              </h1>
-              <p className="text-sm text-slate-500">
-                AI-powered insights for your career
-              </p>
+        {/* Main Container - flat border, no heavy shadow */}
+        <div className="bg-white rounded-2xl border border-zinc-200">
+          {/* Header */}
+          <div className="text-center p-12 pb-0">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-100 mb-6">
+              <Sparkles className="w-8 h-8 text-indigo-600" />
             </div>
-            {/* Form */}
-            <div className="p-8">
-              <UploadForm onSubmit={handleAnalyze} isAnalyzing={false} />
-            </div>
+            <h1 className="text-3xl font-bold text-zinc-900 mb-2">
+              Resume Analyzer
+            </h1>
+            <p className="text-base text-zinc-500">
+              AI-powered insights for your career
+            </p>
           </div>
-        )}
 
-        {/* Agent Activity Card */}
-        {isAnalyzing && (
-          <AgentActivity updates={agentUpdates} />
-        )}
+          {/* Content with generous padding */}
+          <div className="p-12">
+            {!isAnalyzing && (
+              <UploadForm onSubmit={handleAnalyze} isAnalyzing={false} />
+            )}
+
+            {isAnalyzing && (
+              <AgentActivity updates={agentUpdates} />
+            )}
+          </div>
+        </div>
 
         {/* Footer */}
-        <p className="text-center mt-8 text-sm text-slate-400">
+        <p className="text-center mt-8 text-sm text-zinc-400">
           Powered by CrewAI and Claude
         </p>
       </div>
